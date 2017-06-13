@@ -11,7 +11,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 
@@ -34,7 +33,7 @@ public class DataSourceTest2Config {
     @Bean(name = DATA_SOURCE_DATA)
     public DataSource test2DataSource() {
 
-        return DataSourceConfig.createBasicDataSource(env.getProperty("datasource.test2.url"), env.getProperty("datasource.test2.username"), env.getProperty("datasource.test2.password"));
+        return DataSourceConfig.createBasicDataSource(env.getProperty("datasource.test2.url"), env.getProperty("datasource.username"), env.getProperty("datasource.password"));
     }
 
     @Bean(name = SQL_SESSION_FACTORY_DATA)
@@ -50,10 +49,9 @@ public class DataSourceTest2Config {
     }
 
     @Bean(name = TX_MANAGER_DATA)
-    public DataSourceTransactionManager dataSourceTransactionManager() {
-        DataSourceTransactionManager txManager = new DataSourceTransactionManager();
-        txManager.setDataSource(test2DataSource());
-        return txManager;
+    public DataSourceTransactionManager dataSourceTransactionManager(@Qualifier(DATA_SOURCE_DATA) DataSource testSource) {
+
+        return new DataSourceTransactionManager(testSource);
     }
 
 }

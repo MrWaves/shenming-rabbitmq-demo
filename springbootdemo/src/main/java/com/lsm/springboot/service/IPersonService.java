@@ -12,6 +12,5 @@ public interface IPersonService {
 
     Person selectById(int id);
 
-    @Transactional(value = "testTxManager")
     void transactionTestFailure() throws IllegalAccessException;
 }

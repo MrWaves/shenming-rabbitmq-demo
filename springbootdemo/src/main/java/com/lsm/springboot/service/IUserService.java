@@ -1,6 +1,7 @@
 package com.lsm.springboot.service;
 
 import com.lsm.springboot.domain.User;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,7 +16,9 @@ public interface IUserService {
 
     List<User> findByUserIds(List<Integer> ids);
 
+    @Transactional(value = "shardingTransactionManager")
     void transactionTestSucess();
 
+    @Transactional(value = "shardingTransactionManager")
     void transactionTestFailure() throws IllegalAccessException;
 }

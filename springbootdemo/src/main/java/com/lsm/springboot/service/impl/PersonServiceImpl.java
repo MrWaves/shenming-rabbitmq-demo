@@ -31,21 +31,20 @@ public class PersonServiceImpl implements IPersonService {
         return personMapper.selectById(id);
     }
 
-    @Transactional(value = "testTxManager")
     @Override
     public void transactionTestFailure() throws IllegalAccessException {
         Person person = new Person();
         person.setName("transactionTest");
         personMapper.insert(person);
 
-        Person person2 = new Person();
+       /* Person person2 = new Person();
         person2.setName("transactionTest2");
-        personMapper.insert(person2);
+        personMapper.insert(person2);*/
 
-        /*Employee employee = new Employee();
+        Employee employee = new Employee();
         employee.setName("transactionTest2");
         employee.setPhoneNum(18621989999L);
-        employeeMapper.insert(employee);*/
+        employeeMapper.insert(employee);
 
         throw new IllegalAccessException();
 

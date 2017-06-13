@@ -21,7 +21,6 @@ import javax.sql.DataSource;
  * Created by lishenming on 2017/4/19.
  */
 @Configuration
-@EnableTransactionManagement
 @MapperScan(basePackages = DataSourceTestConfig.DATA_PACKAGE, sqlSessionFactoryRef = DataSourceTestConfig.SQL_SESSION_FACTORY_DATA)
 public class DataSourceTestConfig {
     private static final Logger logger = LoggerFactory.getLogger(DataSourceTestConfig.class);
@@ -33,9 +32,9 @@ public class DataSourceTestConfig {
 
     @Value("${datasource.test.url}")
     private String url;
-    @Value("${datasource.test.username}")
+    @Value("${datasource.username}")
     private String username;
-    @Value("${datasource.test.password}")
+    @Value("${datasource.password}")
     private String password;
 
     @Bean(name = DATA_SOURCE_DATA)
@@ -64,9 +63,8 @@ public class DataSourceTestConfig {
     @Bean(name = TX_MANAGER_DATA)
     @Primary
     public DataSourceTransactionManager dataSourceTransactionManager(@Qualifier(DATA_SOURCE_DATA) DataSource testSource) {
-        DataSourceTransactionManager txManager = new DataSourceTransactionManager();
-        txManager.setDataSource(testSource);
-        return txManager;
+
+        return new DataSourceTransactionManager(testSource);
     }
 
 }

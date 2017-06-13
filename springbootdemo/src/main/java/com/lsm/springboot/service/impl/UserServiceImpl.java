@@ -1,5 +1,6 @@
 package com.lsm.springboot.service.impl;
 
+import com.dangdang.ddframe.rdb.sharding.id.generator.IdGenerator;
 import com.lsm.springboot.domain.Student;
 import com.lsm.springboot.domain.User;
 import com.lsm.springboot.mapper.sharding.StudentMapper;
@@ -24,6 +25,9 @@ public class UserServiceImpl implements IUserService {
     @Autowired
     public StudentMapper studentMapper;
 
+    @Autowired
+    private IdGenerator idGenerator;
+
     @Override
     public Integer insert(User u) {
         return userMapper.insert(u);
@@ -39,32 +43,36 @@ public class UserServiceImpl implements IUserService {
         return userMapper.findByUserIds(ids);
     }
 
-    @Transactional(propagation= Propagation.REQUIRED)
+    @Transactional(value = "shardingTransactionManager")
     @Override
     public void transactionTestSucess() {
         User u = new User();
+        u.setId(idGenerator.generateId().longValue());
         u.setUserId(29);
         u.setAge(25);
         u.setName("war3 1.27");
         userMapper.insert(u);
 
         Student student = new Student();
+        student.setId(idGenerator.generateId().longValue());
         student.setStudentId(22);
         student.setAge(21);
         student.setName("hehe");
         studentMapper.insert(student);
     }
 
-    @Transactional
+    @Transactional(value = "shardingTransactionManager")
     @Override
     public void transactionTestFailure() throws IllegalAccessException {
         User u = new User();
+        u.setId(idGenerator.generateId().longValue());
         u.setUserId(31);
         u.setAge(25);
         u.setName("war3 1.27 good");
         userMapper.insert(u);
 
         Student student = new Student();
+        student.setId(idGenerator.generateId().longValue());
         student.setStudentId(31);
         student.setAge(21);
         student.setName("hehe1");

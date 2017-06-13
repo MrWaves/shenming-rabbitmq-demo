@@ -13,7 +13,7 @@ public class Student implements Serializable {
 
     private static final long serialVersionUID = 8920597824668331209L;
 
-    private Integer id;
+    private Long id;
 
     private Integer studentId;
 

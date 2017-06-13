@@ -42,9 +42,9 @@ public class DataSourceShardingConfig {
 
     private static final String DATA_SOURCE_DATA = "shardingDataSource";
 
-    @Value("${datasource.test.username}")
+    @Value("${datasource.username}")
     private String username;
-    @Value("${datasource.test.password}")
+    @Value("${datasource.password}")
     private String password;
 
     private DataSource createDataSource(final String dataSourceName) {
@@ -184,11 +184,8 @@ public class DataSourceShardingConfig {
      */
     @Bean(name = "shardingTransactionManager")
     public DataSourceTransactionManager shardingTransactionManager(@Qualifier(DATA_SOURCE_DATA) ShardingDataSource shardingDataSource) {
-        DataSourceTransactionManager dataSourceTransactionManager = new DataSourceTransactionManager();
 
-        dataSourceTransactionManager.setDataSource(shardingDataSource);
-
-        return dataSourceTransactionManager;
+        return new DataSourceTransactionManager(shardingDataSource);
     }
 
     @Bean

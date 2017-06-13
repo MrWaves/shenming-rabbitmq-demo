@@ -43,6 +43,7 @@ public class ShardingJdbcMybatisTest extends BaseTest {
     public void testStudentInsert() {
         for (int i = 0; i < 16; i++) {
             Student student = new Student();
+            student.setId(idGenerator.generateId().longValue());
             student.setStudentId(i);
             student.setAge(20 + i);
             student.setName("test" + i);
