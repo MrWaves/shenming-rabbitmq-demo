@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns           ="http://www.w3.org/1999/xhtml"
+      xmlns:th        ="http://www.thymeleaf.org"
+      xmlns:layout    ="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="base">
+<head>
+    <title>Contents</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div th:each="map : ${myMap}">
+        <table class="table">
+            <thead class="sunflower">
+            <tr>
+                <td>ID</td>
+                <td>NAME</td>
+            </tr>
+            </thead>
+            <tbody th:each="list : ${map.value}">
+            <tr>
+                <td class="text-str" th:text="${list.id}"></td>
+                <td class="text-str" th:text="${list.name}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+</body>
+</html>
