@@ -1,5 +1,6 @@
 package com.lsm.springboot.config;
 
+import com.lsm.springboot.constant.TransactionalManagerConstant;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -28,7 +29,6 @@ public class DataSourceTestConfig {
     static final String SQL_SESSION_FACTORY_DATA = "sqlSessionFactoryData";
 
     private static final String DATA_SOURCE_DATA = "testDataSource";
-    private static final String TX_MANAGER_DATA = "testTxManager";
 
     @Value("${datasource.test.url}")
     private String url;
@@ -60,7 +60,7 @@ public class DataSourceTestConfig {
         }
     }
 
-    @Bean(name = TX_MANAGER_DATA)
+    @Bean(name = TransactionalManagerConstant.TEST_DATASOURCE_TRANSACTIONAL_MANAGER_NAME)
     @Primary
     public DataSourceTransactionManager dataSourceTransactionManager(@Qualifier(DATA_SOURCE_DATA) DataSource testSource) {
 

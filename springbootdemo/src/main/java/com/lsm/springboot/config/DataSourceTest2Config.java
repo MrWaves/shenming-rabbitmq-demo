@@ -1,5 +1,6 @@
 package com.lsm.springboot.config;
 
+import com.lsm.springboot.constant.TransactionalManagerConstant;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
@@ -25,7 +26,7 @@ public class DataSourceTest2Config {
     static final String SQL_SESSION_FACTORY_DATA = "test2SqlSessionFactory";
 
     private static final String DATA_SOURCE_DATA = "test2DataSource";
-    private static final String TX_MANAGER_DATA = "test2TxManager";
+
 
     @Autowired
     private Environment env;
@@ -48,7 +49,7 @@ public class DataSourceTest2Config {
         }
     }
 
-    @Bean(name = TX_MANAGER_DATA)
+    @Bean(name = TransactionalManagerConstant.TEST2_DATASOURCE_TRANSACTIONAL_MANAGER_NAME)
     public DataSourceTransactionManager dataSourceTransactionManager(@Qualifier(DATA_SOURCE_DATA) DataSource testSource) {
 
         return new DataSourceTransactionManager(testSource);

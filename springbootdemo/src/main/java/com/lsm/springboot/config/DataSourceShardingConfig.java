@@ -12,6 +12,7 @@ import com.lsm.springboot.algorithm.StudentSingleKeyDatabaseShardingAlgorithm;
 import com.lsm.springboot.algorithm.StudentSingleKeyTableShardingAlgorithm;
 import com.lsm.springboot.algorithm.UserSingleKeyDatabaseShardingAlgorithm;
 import com.lsm.springboot.algorithm.UserSingleKeyTableShardingAlgorithm;
+import com.lsm.springboot.constant.TransactionalManagerConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -182,8 +183,8 @@ public class DataSourceShardingConfig {
      * @param shardingDataSource
      * @return
      */
-    @Bean(name = "shardingTransactionManager")
-    public DataSourceTransactionManager shardingTransactionManager(@Qualifier(DATA_SOURCE_DATA) ShardingDataSource shardingDataSource) {
+    @Bean(name = TransactionalManagerConstant.SHARDING_DATASOURCE_TRANSACTIONAL_MANAGER_NAME)
+    public DataSourceTransactionManager shardingTransactionManager(@Qualifier(DATA_SOURCE_DATA) DataSource shardingDataSource) {
 
         return new DataSourceTransactionManager(shardingDataSource);
     }

@@ -1,6 +1,7 @@
 package com.lsm.springboot.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 
 import javax.sql.DataSource;
 
@@ -10,6 +11,13 @@ import javax.sql.DataSource;
 public class DataSourceConfig {
 
     static DataSource createBasicDataSource(String url, String username, String password) {
+        DataSourceBuilder.create()
+                .driverClassName("com.mysql.jdbc.Driver")
+                .url(url)
+                .username(username)
+                .password(password)
+                .build();
+
         DruidDataSource dataSource = new DruidDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         dataSource.setUrl(url);
