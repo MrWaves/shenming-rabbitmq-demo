@@ -1,5 +1,5 @@
 use `test2`;
-CREATE TABLE `t_user` (
+CREATE TABLE `t_employee` (
 	`id` BIGINT(11) NOT NULL AUTO_INCREMENT,
 	`phoneNum` BIGINT(11) NOT NULL,
 	`name` VARCHAR(200) NULL,
@@ -13,7 +13,19 @@ CREATE TABLE `t_person` (
   `name` VARCHAR(200) NULL,
   `insert_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-)COMMENT='employee';
+)COMMENT='person';
+CREATE TABLE `t_admin_user` (
+	`id` BIGINT(11) NOT NULL AUTO_INCREMENT,
+	`user_name` VARCHAR(50) NOT NULL,
+	`pass_word` VARCHAR(50) NOT NULL,
+	`is_deleted` TINYINT(2) NOT NULL DEFAULT '0',
+	`update_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+;
+INSERT INTO `t_admin_user` (`user_name`, `pass_word`, `is_deleted`, `update_time`, `create_time`) VALUES ('admin', '21232f297a57a5a743894a0e4a801fc3', 0, '2017-06-15 15:59:00', '2017-06-15 15:59:00');
 
 -- --------------------------------------------------------
 -- 主机:                           127.0.0.1
