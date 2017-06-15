@@ -21,6 +21,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -59,6 +61,8 @@ public class DataSourceShardingConfig {
         try {
             SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
             sessionFactory.setDataSource(dataSource);
+            Resource[] mapperResources = new PathMatchingResourcePatternResolver().getResources("classpath*:mapper/test/*.xml");
+            sessionFactory.setMapperLocations(mapperResources);
             return sessionFactory.getObject();
         } catch (Exception e) {
             log.error("faile to create data sql session", e);

@@ -13,6 +13,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -50,9 +52,9 @@ public class DataSourceTestConfig {
             SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
             sessionFactory.setDataSource(testSource);
             // 当xml文件和mapper不在一起的时候
-          /*  Resource[] mapperResources = new PathMatchingResourcePatternResolver().getResources("classpath:config/mybatis/mapper/data*//*.xml");
-            sessionFactory.setMapperLocations(mapperResources);*/
-           /* sessionFactory.setConfigLocation(new PathMatchingResourcePatternResolver().getResource("classpath:config/mybatis/mybatis-config.xml"));*/
+            Resource[] mapperResources = new PathMatchingResourcePatternResolver().getResources("classpath*:mapper/test/*.xml");
+            sessionFactory.setMapperLocations(mapperResources);
+            /*sessionFactory.setConfigLocation(new PathMatchingResourcePatternResolver().getResource("classpath:config/mybatis/mybatis-config.xml"));*/
             return sessionFactory.getObject();
         } catch (Exception e) {
             logger.error("faile to create data sql session", e);

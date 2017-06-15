@@ -144,7 +144,17 @@
             <artifactId>sharding-jdbc-self-id-generator</artifactId>
             <version>1.4.2</version>
         </dependency>
+        <!-- SpringWebSocket依赖 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
 
+        <!-- 引入security模块 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
         <!--&lt;!&ndash; cxf支持 &ndash;&gt;
         <dependency>
             <groupId>org.apache.cxf</groupId>

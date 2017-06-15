@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import javax.sql.DataSource;
@@ -42,6 +44,8 @@ public class DataSourceTest2Config {
         try {
             SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
             sessionFactory.setDataSource(test2Source);
+            Resource[] mapperResources = new PathMatchingResourcePatternResolver().getResources("classpath*:mapper/test2/*.xml");
+            sessionFactory.setMapperLocations(mapperResources);
             return sessionFactory.getObject();
         } catch (Exception e) {
             logger.error("faile to create data sql session", e);

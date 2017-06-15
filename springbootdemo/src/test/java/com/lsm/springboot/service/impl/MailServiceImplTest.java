@@ -3,6 +3,7 @@ package com.lsm.springboot.service.impl;
 import com.lsm.springboot.BaseTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 
 /**
  * Created by shenming.li on 2017/6/12.
@@ -38,5 +39,11 @@ public class MailServiceImplTest extends BaseTest {
                 "<html><body>这是有嵌入静态资源：<img src=\'cid:" + rscId + "\' ></body></html>",
                 "C:\\Users\\shenming.li\\Desktop\\1111.png",
                 rscId);
+    }
+
+    @Test
+    public void test() {
+        String admin = new Md5PasswordEncoder().encodePassword("admin", null);
+        System.out.println(admin);
     }
 }
