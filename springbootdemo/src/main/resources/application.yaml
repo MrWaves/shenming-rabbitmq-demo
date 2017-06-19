@@ -11,6 +11,7 @@ logging:
 server:
   session:
     timeout: 30
+  port: 9088
 spring:
   # mail 的相关配置
   mail:
