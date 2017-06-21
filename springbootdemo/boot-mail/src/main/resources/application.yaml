@@ -1,0 +1,19 @@
+logging:
+  config: "classpath:log4j2_dev.xml"
+server:
+  session:
+    timeout: 30
+spring:
+  # mail 的相关配置
+  mail:
+    host: smtp.126.com
+    # 授权码是用于登录第三方邮件客户端的专用密码
+    password: 920116li
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+    username: lishenming8@126.com

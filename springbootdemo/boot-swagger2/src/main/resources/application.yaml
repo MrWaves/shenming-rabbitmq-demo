@@ -1,0 +1,5 @@
+logging:
+  config: "classpath:log4j2_dev.xml"
+server:
+  session:
+    timeout: 30
