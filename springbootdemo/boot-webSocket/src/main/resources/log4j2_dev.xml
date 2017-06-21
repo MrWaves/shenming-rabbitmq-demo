@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="60" status="warn">
+    <Properties>
+        <Property name="log-path">d:</Property>
+    </Properties>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+           <!-- &lt;!&ndash; 控制台只输出level及以上级别的信息(onMatch),其他的直接拒绝(onMismatch) &ndash;&gt;
+            <ThresholdFilter level="Debug" onMatch="ACCEPT" onMismatch="DENY"/>-->
+            <PatternLayout>
+                <!--
+                %-5level 输出日志级别，-5表示左对齐并且固定输出5个字符，如果不足在右边补0
+                %d{yyyy-MM-dd HH:mm:ss.SSS} 表示输出到毫秒的时间
+                %t 输出当前线程名称
+                %m: 输出代码中指定的消息,产生的日志具体信息
+                %msg 日志文本
+                %n 换行
+                %c: 输出日志信息所属的类目，通常就是所在类的全名
+                %F 输出所在的类文件名，如Client.java
+                %L 输出行号
+                %M 输出所在方法名
+                %l  输出语句所在的行数, 包括类名、方法名、文件名、行数
+
+                -->
+                <pattern>
+                    [%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{36} - %msg%n
+                </pattern>>
+            </PatternLayout>
+        </Console>
+        <!-- 获取用户HOME目录的占位符是“${sys:user.home}” -->
+        <RollingFile name="RollingFileInfo" fileName="${sys:user.home}/logs/hpaasvc/info.log"
+                     filePattern="${sys:user.home}/logs/hpaasvc/$${date:yyyy-MM}/info-%d{yyyy-MM-dd}-%i.log">
+            <Filters>
+                <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
+                <ThresholdFilter level="INFO" />
+                <!--控制台level及以上级别的信息都拒绝 -->
+                <ThresholdFilter level="WARN" onMatch="DENY" onMismatch="NEUTRAL" />
+            </Filters>
+            <PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="100 MB" />
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="RollingFileWarn" fileName="${sys:user.home}/logs/hpaasvc/warn.log"
+                     filePattern="${sys:user.home}/logs/hpaasvc/$${date:yyyy-MM}/warn-%d{yyyy-MM-dd}-%i.log">
+            <Filters>
+                <ThresholdFilter level="WARN" />
+                <ThresholdFilter level="ERROR" onMatch="DENY"
+                                 onMismatch="NEUTRAL" />
+            </Filters>
+            <PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="100 MB" />
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="RollingFileError" fileName="${sys:user.home}/logs/hpaasvc/error.log"
+                     filePattern="${sys:user.home}/logs/hpaasvc/$${date:yyyy-MM}/error-%d{yyyy-MM-dd}-%i.log">
+            <ThresholdFilter level="ERROR" />
+            <PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="100 MB" />
+            </Policies>
+        </RollingFile>
+    </Appenders>
+    <loggers>
+        <!--单独指定日志的形式，比如要为指定包下的class指定不同的日志级别-->
+        <logger name="org.springframework" level="INFO" />
+        <logger name="org.mybatis" level="INFO" />
+        <!--打印sql语句和返回集-->
+        <logger name="com.lsm.springboot.mapper" level="DEBUG" />
+
+        <root level="info">
+            <appender-ref ref="Console" />
+            <appender-ref ref="RollingFileInfo" />
+            <appender-ref ref="RollingFileWarn" />
+            <appender-ref ref="RollingFileError" />
+        </root>
+
+    </loggers>
+
+</Configuration>

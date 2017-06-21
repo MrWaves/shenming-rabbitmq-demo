@@ -23,15 +23,15 @@ public class WebSocketController {
         /**
          * 此处是一段硬编码。如果发送人是wyf 则发送给 wisely 如果发送人是wisely 就发送给 wyf。
          */
-        if (principal.getName().equals("wyf")) {
+        if (principal.getName().equals("lsm")) {
             //通过convertAndSendToUser 向用户发送信息,
             // 第一个参数是接收消息的用户,第二个参数是浏览器订阅的地址,第三个参数是消息本身
 
-            messagingTemplate.convertAndSendToUser("wisely",
+            messagingTemplate.convertAndSendToUser("lsmtest",
                     "/queue/notifications", principal.getName() + "-send:"
                             + message.getName());
         } else {
-            messagingTemplate.convertAndSendToUser("wyf",
+            messagingTemplate.convertAndSendToUser("lsm",
                     "/queue/notifications", principal.getName() + "-send:"
                             + message.getName());
         }

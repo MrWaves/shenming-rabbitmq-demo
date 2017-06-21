@@ -1,0 +1,10 @@
+datasource:
+  password: lishenming
+  test:
+    url: "jdbc:mysql://127.0.0.1:3306/test?characterEncoding=UTF-8"
+  username: lishenming
+logging:
+  config: "classpath:log4j2_dev.xml"
+server:
+  session:
+    timeout: 30

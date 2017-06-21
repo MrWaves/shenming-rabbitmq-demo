@@ -54,7 +54,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Bean
     public Md5PasswordEncoder passwordEncoder() {
-       /* new Md5PasswordEncoder().encodePassword("admin", null);*/
         return new Md5PasswordEncoder();
 
     }
@@ -64,5 +63,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/resources/static/**");
     }
+
+   /* public static void main(String[] args) {
+        String admin = new Md5PasswordEncoder().encodePassword("lsmtest", null);
+        System.out.println();
+    }*/
 
 }

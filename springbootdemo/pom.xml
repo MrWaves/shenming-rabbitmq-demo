@@ -17,8 +17,8 @@
 		<module>boot-sharding</module>
 		<module>boot-swagger2</module>
 		<module>boot-scheduling</module>
+        <module>boot-webSocket</module>
         <!--<module></module>
-        <module></module>
         <module></module>-->
 		
     </modules>
