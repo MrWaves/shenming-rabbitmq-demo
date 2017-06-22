@@ -13,12 +13,15 @@
         <module>boot-mail</module>
 		<module>boot-mongo-log4j2</module>
 		<module>boot-rabbitmq</module>
-		<module>boot-redis</module>
+		<module>boot-redis-jedis</module>
+        <module>boot-redis-redisTemplate</module>
 		<module>boot-sharding</module>
 		<module>boot-swagger2</module>
 		<module>boot-scheduling</module>
         <module>boot-webSocket</module>
         <!--<module></module>
+        <module></module>
+        <module></module>
         <module></module>-->
 		
     </modules>

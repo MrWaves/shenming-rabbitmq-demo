@@ -2,11 +2,15 @@ package com.lsm.springboot.service.impl;
 
 import com.lsm.springboot.config.RabbitMQConfig;
 import com.lsm.springboot.service.ISenderService;
+import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.MessagePostProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Created by lishenming on 2017/6/12.
@@ -26,7 +30,17 @@ public class SenderServiceImpl implements ISenderService {
     @Override
     public void send(String massage) {
 
-        rabbitTemplate.convertAndSend(RabbitMQConfig.STRING_QUEUE_NAME, massage);
+        /**
+         *  MessagePostProcessor 可以对message进行处理，如指定编码，设置messageID
+         */
+        rabbitTemplate.convertAndSend(RabbitMQConfig.STRING_QUEUE_NAME, (Object)massage, new MessagePostProcessor() {
+            @Override
+            public Message postProcessMessage(Message message) throws AmqpException {
+                message.getMessageProperties().setReceivedDelay(1000);
+                message.getMessageProperties().setMessageId(UUID.randomUUID().toString());
+                return message;
+            }
+        });
     }
 
     @Override

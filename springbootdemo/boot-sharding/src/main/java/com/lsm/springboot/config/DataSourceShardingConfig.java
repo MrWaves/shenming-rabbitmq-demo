@@ -1,6 +1,7 @@
 package com.lsm.springboot.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.dangdang.ddframe.rdb.sharding.api.ShardingDataSourceFactory;
 import com.dangdang.ddframe.rdb.sharding.api.rule.DataSourceRule;
 import com.dangdang.ddframe.rdb.sharding.api.rule.ShardingRule;
 import com.dangdang.ddframe.rdb.sharding.api.rule.TableRule;
@@ -188,7 +189,7 @@ public class DataSourceShardingConfig {
     @Bean(name = DATA_SOURCE_DATA)
     public DataSource shardingDataSource(ShardingRule shardingRule) {
 
-        return new ShardingDataSource(shardingRule);
+        return ShardingDataSourceFactory.createDataSource(shardingRule);
     }
 
     /**

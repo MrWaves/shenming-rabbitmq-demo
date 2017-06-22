@@ -1,0 +1,17 @@
+logging:
+  config: "classpath:log4j2_dev.xml"
+server:
+  session:
+    timeout: 30
+spring:
+  # redis 的相关配置
+  redis:
+    host: "127.0.0.1"
+    password: my_password
+    pool:
+      max-active: 8
+      max-idle: 8
+      max-wait: -1
+      min-idle: 0
+    port: 6379
+    timeout: 0

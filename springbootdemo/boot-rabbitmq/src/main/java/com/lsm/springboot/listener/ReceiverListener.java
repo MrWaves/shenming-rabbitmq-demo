@@ -1,10 +1,14 @@
 package com.lsm.springboot.listener;
 
 import com.lsm.springboot.config.RabbitMQConfig;
+import com.rabbitmq.client.Channel;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.MessageDeliveryMode;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -20,11 +24,29 @@ public class ReceiverListener {
         System.out.println("Receiver object : " + message);
     }
 
-    @RabbitHandler
+   /* @RabbitHandler
     @RabbitListener(queues = RabbitMQConfig.STRING_QUEUE_NAME, containerFactory="rabbitListenerContainerFactory")
     public void processString(String message) {
 
         System.out.println("Receiver string : " + message);
+        throw new  RuntimeException("error");
+
+    }*/
+
+    @RabbitHandler
+    @RabbitListener(queues = RabbitMQConfig.STRING_QUEUE_NAME, containerFactory="rabbitListenerContainerFactory")
+    public void processString(Message message, Channel channel) {
+        String messageId = message.getMessageProperties().getMessageId();
+        try {
+            channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String strMessage = new String(message.getBody());
+        System.out.println("Receiver string : " + message);
+
+//        throw new  RuntimeException("error");
+
     }
 
     @RabbitHandler
