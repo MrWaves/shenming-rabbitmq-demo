@@ -67,17 +67,15 @@
             </Policies>
         </RollingFile>
 
-
     </Appenders>
     <loggers>
         <!--单独指定日志的形式，比如要为指定包下的class指定不同的日志级别-->
         <logger name="org.springframework" level="INFO" />
         <logger name="org.mybatis" level="INFO" />
         <logger name="org.mongodb" level="INFO" />
-       <!-- &lt;!&ndash;打印sql语句和返回集&ndash;&gt;
-        <logger name="com.lsm.springboot.mapper" level="DEBUG" />-->
-        <!--当当路由映射后真实sql-->
-        <logger name="com.dangdang.ddframe.rdb.sharding.router.SQLRouteEngine" level="DEBUG" />
+        <!--打印sql语句和返回集-->
+        <logger name="com.lsm.springboot.mapper" level="DEBUG" />
+
         <root level="info">
             <appender-ref ref="Console" />
             <appender-ref ref="RollingFileInfo" />

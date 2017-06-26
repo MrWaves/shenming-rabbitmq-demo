@@ -64,8 +64,13 @@ public class RedisServiceImplTest extends BaseTest {
 
     @Test
     public void testRPush() {
-        redisServiceImpl.rPush("employee_lPush", new Employee(4000L, 48621949197L, "lsm42", new Date()));
-        redisServiceImpl.rPush("employee_lPush", new Employee(4001L, 48621949198L, "lsm43", new Date()));
+
+//        redisServiceImpl.rPush("employee_lPush", new Employee(4001L, 48621949198L, "lsm43", new Date()));
+        System.out.println("start" + System.currentTimeMillis());
+        for (int i = 0; i < 1000000; i++) {
+            redisServiceImpl.rPush("employee_lPush_batch", new Employee((long) i, i + 100L, "test" + i, new Date()));
+        }
+        System.out.println("end" + System.currentTimeMillis());
     }
 
     @Test
@@ -84,18 +89,23 @@ public class RedisServiceImplTest extends BaseTest {
 
     @Test
     public void testLLen() {
-        Long length = redisServiceImpl.lLen("employee_lPush");
+        Long length = redisServiceImpl.lLen("employee_lPush_batch");
         System.out.println(length);
     }
 
     @Test
     public void testLRange() {
-        redisServiceImpl.rPush("employee_lPush", new Employee(5000L, 48621949197L, "lsm42", new Date()));
+       /* redisServiceImpl.rPush("employee_lPush", new Employee(5000L, 48621949197L, "lsm42", new Date()));
         redisServiceImpl.rPush("employee_lPush", new Employee(5001L, 48621949198L, "lsm43", new Date()));
         redisServiceImpl.lPush("employee_lPush", new Employee(6000L, 18621949197L, "lsm12", new Date()));
-        redisServiceImpl.lPush("employee_lPush", new Employee(6001L, 18621949198L, "lsm13", new Date()));
-        List<String> stringList = redisServiceImpl.lRange("employee_lPush", 2, 4);
+        redisServiceImpl.lPush("employee_lPush", new Employee(6001L, 18621949198L, "lsm13", new Date()));*/
+        long start = System.currentTimeMillis();
+        System.out.println("start:" + start);
+        List<String> stringList = redisServiceImpl.lRange("employee_lPush_batch", 1000, 2000);
         System.out.println(stringList );
+        long end = System.currentTimeMillis();
+        System.out.println("end:" + end);
+        System.out.println("total:" + (end - start));
     }
 
 }

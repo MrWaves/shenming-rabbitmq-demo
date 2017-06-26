@@ -29,7 +29,7 @@ public class ShardingJdbcMybatisTest extends BaseTest {
 
     @Test
     public void testUserInsert() {
-        for (int i = 1000; i < 1012; i++) {
+        for (int i = 10000; i < 10012; i++) {
             User u = new User();
             u.setId(idGenerator.generateId().longValue());
             u.setUserId(i);
@@ -47,7 +47,7 @@ public class ShardingJdbcMybatisTest extends BaseTest {
 
     @Test
     public void testStudentInsert() {
-        for (int i = 0; i < 16; i++) {
+        for (int i = 1000; i < 1016; i++) {
             Student student = new Student();
             student.setId(idGenerator.generateId().longValue());
             student.setStudentId(i);

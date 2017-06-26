@@ -1,6 +1,7 @@
 package com.lsm.springboot.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.dangdang.ddframe.rdb.sharding.api.MasterSlaveDataSourceFactory;
 import com.dangdang.ddframe.rdb.sharding.api.ShardingDataSourceFactory;
 import com.dangdang.ddframe.rdb.sharding.api.rule.DataSourceRule;
 import com.dangdang.ddframe.rdb.sharding.api.rule.ShardingRule;
@@ -86,12 +87,25 @@ public class DataSourceShardingConfig {
      */
     @Bean
     public DataSourceRule dataSourceRule(){
-        //设置分库映射
+        // 构建读写分离数据源
+        DataSource masterDataSourceSharding0 = createDataSource("sharding_0");
+        DataSource slaveDataSourceSharding0 = createDataSource("slave_sharding_0");
+        DataSource masterSlaveds0 = MasterSlaveDataSourceFactory.createDataSource("ms_0", masterDataSourceSharding0, slaveDataSourceSharding0);
+        DataSource masterDataSourceSharding1 = createDataSource("sharding_1");
+        DataSource slaveDataSourceSharding1 = createDataSource("slave_sharding_1");
+        DataSource masterSlaveds1 = MasterSlaveDataSourceFactory.createDataSource("ms_1", masterDataSourceSharding1, slaveDataSourceSharding1);
+        // 构建分库分表数据源
+        Map<String, DataSource> dataSourceMap = new HashMap<>(2);
+        dataSourceMap.put("ms_0", masterSlaveds0);
+        dataSourceMap.put("ms_1", masterSlaveds1);
+        return new DataSourceRule(dataSourceMap);
+       //分库分表demo
+      /*  //设置分库映射
         Map<String, DataSource> dataSourceMap = new HashMap<>(2);
         //添加两个数据库ds_0,ds_1到map里
         dataSourceMap.put("sharding_0", createDataSource("sharding_0"));
         dataSourceMap.put("sharding_1", createDataSource("sharding_1"));
-        return new DataSourceRule(dataSourceMap, "sharding_0");
+        return new DataSourceRule(dataSourceMap, "sharding_0");*/
     }
 
     /**

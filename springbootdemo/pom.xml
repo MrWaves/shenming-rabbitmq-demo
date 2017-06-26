@@ -19,8 +19,8 @@
 		<module>boot-swagger2</module>
 		<module>boot-scheduling</module>
         <module>boot-webSocket</module>
+        <module>boot-mybatis</module>
         <!--<module></module>
-        <module></module>
         <module></module>
         <module></module>-->
 		
