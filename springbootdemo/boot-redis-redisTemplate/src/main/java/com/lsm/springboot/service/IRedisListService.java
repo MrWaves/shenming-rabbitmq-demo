@@ -4,28 +4,12 @@ import java.util.List;
 
 /**
  * Created by za-lishenming on 2017/6/2.
- * http://irfen.me/category/redis%E5%AD%A6%E4%B9%A0%E4%B8%93%E9%A2%98/page/2/
- * lPush, rPush, lPop, rPop, lLen, lRange 都是对list的操作  http://irfen.me/redis-learn-5-simple-command-list/
+ * 对列表的操作
+ * lPush, rPush, lPop, rPop, lLen, lRange
+ * http://irfen.me/redis-learn-5-simple-command-list/
  */
-public interface IRedisService {
+public interface IRedisListService {
 
-    /**
-     *
-     * @param key
-     * @param value
-     * @return
-     */
-    boolean set(String key, String value);
-
-    boolean set(String key, String value, long expireSeconds);
-
-    String get(String key);
-
-    boolean expire(String key,long expire);
-
-    <T> boolean setList(String key ,List<T> list);
-
-    <T> List<T> getList(String key,Class<T> clz);
 
     /**
      * 向列表左边添加元素
@@ -74,5 +58,5 @@ public interface IRedisService {
      * @param end 从0开始
      * @return
      */
-    List<String> lRange (String key, long start, long end);
+    List<String> lRange(String key, long start, long end);
 }
