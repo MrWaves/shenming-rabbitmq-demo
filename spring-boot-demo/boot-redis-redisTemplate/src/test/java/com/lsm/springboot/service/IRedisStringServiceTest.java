@@ -1,4 +1,4 @@
-package com.lsm.springboot.service.impl;
+package com.lsm.springboot.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.lsm.springboot.BaseTest;
@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by za-lishenming on 2017/6/2.
  */
-public class RedisStringServiceImplTest extends BaseTest {
+public class IRedisStringServiceTest extends BaseTest {
     @Autowired
     private IRedisStringService redisStringServiceImpl;
 
@@ -55,5 +55,29 @@ public class RedisStringServiceImplTest extends BaseTest {
     public void testGetList() {
         List<Employee> employeeList = redisStringServiceImpl.getList("employeeList", Employee.class);
         System.out.println(employeeList);
+    }
+
+    @Test
+    public void testIncr() {
+        Long test_incr = redisStringServiceImpl.incr("test_incr");
+        System.out.println(test_incr);
+    }
+
+    @Test
+    public void testIncrBy() {
+        Long test_incrBy = redisStringServiceImpl.incrBy("test_incrBy", 100);
+        System.out.println(test_incrBy);
+    }
+
+    @Test
+    public void testDecr() {
+        Long test_decr = redisStringServiceImpl.decr("test_decr");
+        System.out.println(test_decr);
+    }
+
+    @Test
+    public void testDecrBy() {
+        Long test_decrBy = redisStringServiceImpl.decrBy("test_decrBy", 100);
+        System.out.println(test_decrBy);
     }
 }

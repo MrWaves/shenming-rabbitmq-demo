@@ -26,4 +26,31 @@ public interface IRedisStringService {
 
     <T> List<T> getList(String key,Class<T> clz);
 
+    /**
+     * 将键存储的值加1，如果key不存在则当作0来处理
+     * @param key
+     * @return 返回修改后的值
+     */
+    Long incr(String key);
+
+    /**
+     *
+     * @param key
+     * @param amount 将键存储的值加amount
+     * @return
+     */
+    Long incrBy(String key, long amount);
+    /**
+     * 将键存储的值减1，如果key不存在则当作0来处理
+     * @param key
+     * @return 返回修改后的值
+     */
+    Long decr(String key);
+    /**
+     *
+     * @param key
+     * @param amount 将键存储的值减去amount
+     * @return
+     */
+    Long decrBy(String key, long amount);
 }

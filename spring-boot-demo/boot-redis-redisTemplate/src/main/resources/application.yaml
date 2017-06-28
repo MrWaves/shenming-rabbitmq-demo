@@ -7,7 +7,6 @@ spring:
   # redis 的相关配置
   redis:
     host: "127.0.0.1"
-    password: my_password
     pool:
       max-active: 8
       max-idle: 8

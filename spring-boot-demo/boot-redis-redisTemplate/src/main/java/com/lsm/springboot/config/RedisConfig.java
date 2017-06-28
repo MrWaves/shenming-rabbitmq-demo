@@ -18,9 +18,6 @@ public class RedisConfig {
     @Value("${spring.redis.host}")
     private String host;
 
-    @Value("${spring.redis.password}")
-    private String password;
-
     @Value("${spring.redis.port}")
     private Integer port;
 
@@ -47,7 +44,6 @@ public class RedisConfig {
         factory.setPoolConfig(config);
         factory.setHostName(host);
         factory.setPort(port);
-        factory.setPassword(password);
         log.info("JedisConnectionFactory bean init success.");
         return factory;
     }

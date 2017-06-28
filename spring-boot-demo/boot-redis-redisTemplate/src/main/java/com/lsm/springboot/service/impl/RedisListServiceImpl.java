@@ -105,4 +105,16 @@ public class RedisListServiceImpl implements IRedisListService {
             }
         });
     }
+
+    @Override
+    public String rPopLPush(final String sourceKey, final String destKye) {
+        return redisTemplate.execute( new RedisCallback<String>() {
+            @Override
+            public String doInRedis(RedisConnection connection) throws DataAccessException {
+                RedisSerializer<String> serializer = redisTemplate.getStringSerializer();
+                byte[] resultBytes = connection.rPopLPush(serializer.serialize(sourceKey), serializer.serialize(destKye));
+                return serializer.deserialize(resultBytes);
+            }
+        });
+    }
 }

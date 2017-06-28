@@ -59,4 +59,12 @@ public interface IRedisListService {
      * @return
      */
     List<String> lRange(String key, long start, long end);
+
+    /**
+     * 从 sourceKey 列表中弹出位于最左端的元素，然后将这个元素推入 destKey 列表的最左端，并返回这个元素
+     * @param sourceKey
+     * @param destKey
+     * @return
+     */
+    String rPopLPush(String sourceKey, String destKey);
 }

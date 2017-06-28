@@ -82,4 +82,48 @@ public class RedisStringServiceImpl implements IRedisStringService {
         return null;
     }
 
+    @Override
+    public Long incr(final String key) {
+        return redisTemplate.execute(new RedisCallback<Long>() {
+            @Override
+            public Long doInRedis(RedisConnection connection) throws DataAccessException {
+                RedisSerializer<String> serializer = redisTemplate.getStringSerializer();
+                return connection.incr(serializer.serialize(key));
+            }
+        });
+    }
+
+    @Override
+    public Long incrBy(final String key, final long amount) {
+        return redisTemplate.execute(new RedisCallback<Long>() {
+            @Override
+            public Long doInRedis(RedisConnection connection) throws DataAccessException {
+                RedisSerializer<String> serializer = redisTemplate.getStringSerializer();
+                return connection.incrBy(serializer.serialize(key), amount);
+            }
+        });
+    }
+
+    @Override
+    public Long decr(final String key) {
+        return redisTemplate.execute(new RedisCallback<Long>() {
+            @Override
+            public Long doInRedis(RedisConnection connection) throws DataAccessException {
+                RedisSerializer<String> serializer = redisTemplate.getStringSerializer();
+                return connection.decr(serializer.serialize(key));
+            }
+        });
+    }
+
+    @Override
+    public Long decrBy(final String key, final long amount) {
+        return redisTemplate.execute(new RedisCallback<Long>() {
+            @Override
+            public Long doInRedis(RedisConnection connection) throws DataAccessException {
+                RedisSerializer<String> serializer = redisTemplate.getStringSerializer();
+                return connection.decrBy(serializer.serialize(key), amount);
+            }
+        });
+    }
+
 }

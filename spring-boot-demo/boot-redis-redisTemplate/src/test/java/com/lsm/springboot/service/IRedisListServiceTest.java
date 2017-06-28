@@ -1,4 +1,4 @@
-package com.lsm.springboot.service.impl;
+package com.lsm.springboot.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.lsm.springboot.BaseTest;
@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by za-lishenming on 2017/6/2.
  */
-public class RedisListServiceImplTest extends BaseTest {
+public class IRedisListServiceTest extends BaseTest {
 
     @Autowired
     private IRedisListService redisListServiceImpl;
