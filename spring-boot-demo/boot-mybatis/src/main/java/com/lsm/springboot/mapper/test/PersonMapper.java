@@ -17,4 +17,6 @@ public interface PersonMapper {
     Person selectById(@Param("id") int id);
 
     List<Person> selectAll();
+
+    List<Person> selectByTable(@Param("tableName") String tableName);
 }

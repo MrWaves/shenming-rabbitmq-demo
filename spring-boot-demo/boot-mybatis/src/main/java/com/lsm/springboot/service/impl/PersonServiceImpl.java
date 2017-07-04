@@ -34,4 +34,10 @@ public class PersonServiceImpl implements IPersonService {
         return personMapper.selectAll();
     }
 
+    @Override
+    public List<Person> selectByTable( String tableName){
+
+        return personMapper.selectByTable(tableName);
+    }
+
 }

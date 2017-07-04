@@ -15,4 +15,11 @@ public interface IPersonService {
     Person selectById(int id);
 
     List<Person> selectAll();
+
+    /**
+     * 动态表名查询
+     * @param tableName
+     * @return
+     */
+    List<Person> selectByTable(String tableName);
 }

@@ -28,4 +28,10 @@
     FROM t_person
     ORDER BY name
   </select>
+  <select id="selectByTable" resultMap="BaseResultMap" statementType="STATEMENT">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM ${tableName}
+    ORDER BY name
+  </select>
 </mapper>

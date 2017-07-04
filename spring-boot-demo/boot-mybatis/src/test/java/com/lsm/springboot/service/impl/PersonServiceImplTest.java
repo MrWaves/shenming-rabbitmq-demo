@@ -38,4 +38,11 @@ public class PersonServiceImplTest extends BaseTest {
 
         System.out.println("PageInfo: " + pageInfo + ", Page: " + page );
     }
+
+    //动态表名查询
+    @Test
+    public void testSelectByTable() {
+        List<Person> t_person_2017_07 = personServiceImpl.selectByTable("t_person_2017_07");
+        System.out.println(t_person_2017_07);
+    }
 }
