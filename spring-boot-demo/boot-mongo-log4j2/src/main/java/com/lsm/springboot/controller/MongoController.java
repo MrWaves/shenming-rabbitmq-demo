@@ -2,10 +2,12 @@ package com.lsm.springboot.controller;
 
 import com.lsm.springboot.domain.Person;
 import com.lsm.springboot.service.IPersonService;
-import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Created by lishenming on 2017/4/18.

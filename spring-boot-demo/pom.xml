@@ -20,7 +20,8 @@
 		<module>boot-scheduling</module>
         <module>boot-webSocket</module>
         <module>boot-mybatis</module>
-        <!--<module></module>
+		<module>boot-spring-data-elasticsearch</module>
+        <!--
         <module></module>
         <module></module>-->
 		

@@ -25,10 +25,10 @@ public class SenderServiceImplTest extends BaseTest {
         massage.put("date", new Date().toString());
 
         senderServiceImpl.send(massage);
-        testSend2();
+        /*testSend2();
         testSendTopicMassage1();
         testSendTopicMassage2();
-        testSendFanoutMassage();
+        testSendFanoutMassage();*/
     }
 
     @Test

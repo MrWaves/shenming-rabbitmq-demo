@@ -23,9 +23,13 @@ public class PersonServiceImplTest extends BaseTest {
 
     @Test()
     public void testInsert(){
-        Person person = new Person();
-        person.setName("llllll");
-        personServiceImpl.insert(person);
+
+        for (int i = 0; i < 100; i++) {
+            Person person = new Person();
+            person.setName("personName" + i);
+            personServiceImpl.insert(person);
+        }
+
 
     }
 
