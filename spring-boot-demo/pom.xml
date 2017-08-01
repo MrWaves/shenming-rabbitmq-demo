@@ -8,7 +8,6 @@
     <artifactId>spring-boot-demo</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-
     <modules>
         <module>boot-mail</module>
 		<module>boot-mongo-log4j2</module>
@@ -20,10 +19,12 @@
 		<module>boot-scheduling</module>
         <module>boot-webSocket</module>
         <module>boot-mybatis</module>
-		<module>boot-spring-data-elasticsearch</module>
+		<module>boot-elasticsearch-spring-data</module>
+		<module>boot-elasticsearch-java-api</module>
+        <module>boot-lsm-starter</module>
         <!--
-        <module></module>
-        <module></module>-->
+        
+        <module>lsm-starter</module>-->
 		
     </modules>
 
