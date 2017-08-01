@@ -1,0 +1,4 @@
+elasticsearch:
+  cluster-name: my-application
+  cluster-nodes: "192.168.31.80"
+  port: 9300
